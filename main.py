@@ -1,3 +1,4 @@
+import sys
 import pygame
 from pygame.color import Color
 from constants import *
@@ -36,15 +37,18 @@ def main():
 
         for objects in updatable:
             objects.update(dt)
+
         for objects in drawable:
             objects.draw(screen)
+
+        for objects in asteroid:
+            if objects.is_colliding(player):
+                print("Game Over!")
+                sys.exit()
 
         pygame.display.flip()
         #limit the framerate to 60fps
         dt = clock.tick(60)/1000
-    # print("Starting asteroids!")
-    # print(f"Screen width: {SCREEN_WIDTH}")
-    # print(f"Screen height: {SCREEN_HEIGHT}")
 
 if __name__ == "__main__":
     main()
